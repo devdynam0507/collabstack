@@ -1,5 +1,5 @@
 .idea/
 .gradle/
 .DS_Store
-common/src/test/java/net/collabstack/common/JasyptTest.java
+JasyptTest.java
 build/
