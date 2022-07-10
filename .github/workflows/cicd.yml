@@ -42,15 +42,12 @@ jobs:
         file: ./collabstack-be/Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/collabstack-be:latest
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: SSH Action
-        uses: invi5H/ssh-action@v1.0.0
-        with:
-          # A unique name for the server
-          SSH_USER: ubuntu
-          # The hostname or the IP address
-          SSH_HOST: ${{ secrets.BACKEND_EC2_HOST }}
-          SSH_KEY: ${{ secrets.BACKEND_EC2_KEY }}
-          script: sudo ./run.sh
+    - name: SSH Action
+      uses: appleboy/ssh-action@v0.1.4
+      with:
+        # A unique name for the server
+        username: ubuntu
+        # The hostname or the IP address
+        host: ${{ secrets.BACKEND_EC2_HOST }}
+        key: ${{ secrets.BACKEND_EC2_KEY }}
+        script: sudo ./run.sh
