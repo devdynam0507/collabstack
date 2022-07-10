@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    group = 'net.collabstack'
+    version = '0.0.1-ALPHA'
+
+    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+    tasks.withType(JavaCompile){
+        options.encoding = 'UTF-8'
+    }
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    //각각의 모듈에 공통으로 들어갈 dependency
+    dependencies {
+        implementation "com.github.ulisesbocchio:jasypt-spring-boot-starter:$jasyptVersion"
+
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+        testImplementation "org.assertj:assertj-core:3.20.2"
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+}
