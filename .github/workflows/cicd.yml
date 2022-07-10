@@ -42,12 +42,12 @@ jobs:
         file: ./collabstack-be/Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/collabstack-be:latest
-    - name: SSH Action
-      uses: appleboy/ssh-action@v0.1.4
+    - name: Deploy to ec2
+      uses: kevin-leptons/ssh_action@v1
       with:
-        # A unique name for the server
-        username: ubuntu
-        # The hostname or the IP address
+        # URI refers to remote host like `user@host`
         host: ${{ secrets.BACKEND_EC2_HOST }}
-        password: ${{ secrets.BACKEND_EC2_KEY }}
-        script: sudo ./run.sh
+        # Private SSH key to authenticate
+        key: ${{ secrets.BACKEND_EC2_KEY }}
+        # Command to execute, Bash syntax
+        command: sudo ./run.sh
