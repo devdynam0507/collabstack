@@ -5,6 +5,7 @@ plugins {
 subprojects {
     apply plugin: 'java'
     apply plugin: 'idea'
+    apply plugin: 'checkstyle'
 
     group = 'net.collabstack'
     version = '0.0.1-ALPHA'
@@ -46,5 +47,10 @@ subprojects {
             events "started", "skipped", "passed", "failed"
             showStandardStreams true
         }
+    }
+
+    checkstyleMain {
+        ignoreFailures = false
+        configFile = file("$rootDir/settings/checkstyle.xml")
     }
 }
