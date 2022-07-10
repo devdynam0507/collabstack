@@ -40,7 +40,6 @@ jobs:
       with:
         working-directory: ./collabstack-be
         context: .
-        builder: ${{ steps.buildx.outputs.name }}
         file: Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/collabstack-be:latest
