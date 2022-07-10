@@ -49,5 +49,5 @@ jobs:
         username: ubuntu
         # The hostname or the IP address
         host: ${{ secrets.BACKEND_EC2_HOST }}
-        key: ${{ secrets.BACKEND_EC2_KEY }}
+        passphrase: ${{ secrets.BACKEND_EC2_KEY }}
         script: sudo ./run.sh
