@@ -29,10 +29,10 @@ jobs:
         distribution: 'temurin'
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
-    - name: Working Directory
-      working-directory: ./collabstack-be
     - name: Grant execute permission for gradlew
+      working-directory: ./collabstack-be
       run: chmod +x ./gradlew
       
     - name: Build with Gradle
+      working-directory: ./collabstack-be
       run: ./gradlew build
