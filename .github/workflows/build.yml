@@ -5,7 +5,7 @@
 # This workflow will build a package using Gradle and then publish it to GitHub packages when a release is created
 # For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#Publishing-using-gradle
 
-name: Gradle Package
+name: Build collabstack backend
 
 on:
   push:
@@ -15,7 +15,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -30,9 +29,11 @@ jobs:
         distribution: 'temurin'
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
-
+    - name: Setup Symfony
+      run: |
+        cd ./collabstack-be
     - name: Grant execute permission for gradlew
-      run: chmod +x ./collabstack-be/gradlew
+      run: chmod +x gradlew
       
     - name: Build with Gradle
-      run: ./collabstack-be/gradlew build
+      run: ./gradlew build
