@@ -36,5 +36,8 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x ./collabstack-be/gradlew
       
-    - name: Build with Gradle
-      run: ./collabstack-be/gradlew build
+    - name: Build with Gradle witout tests
+      run: ./collabstack-be/gradlew build -x test
+      
+    - name: Test with Gradle
+      run: ./collabstack-be/gradlew test
