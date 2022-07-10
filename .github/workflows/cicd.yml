@@ -38,8 +38,7 @@ jobs:
     - name: Build and push
       uses: docker/build-push-action@v2
       with:
-        working-directory: ./collabstack-be
-        context: .
-        file: Dockerfile
+        context: ./collabstack-be
+        file: ./collabstack-be/Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/collabstack-be:latest
