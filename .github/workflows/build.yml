@@ -29,9 +29,8 @@ jobs:
         distribution: 'temurin'
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
-    - name: Setup Symfony
-      run: |
-        cd ./collabstack-be
+    - name: Working Directory
+      working-directory: ./collabstack-be
     - name: Grant execute permission for gradlew
       run: chmod +x ./gradlew
       
