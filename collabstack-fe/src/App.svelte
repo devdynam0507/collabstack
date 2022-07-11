@@ -5,6 +5,6 @@
 
 <main>
 	<!-- How to routing?: https://kit.svelte.dev/docs/routing -->
-	<!-- <AppLayout/> -->
+	<AppLayout/>
 	<!-- <Box/> -->
 </main>
