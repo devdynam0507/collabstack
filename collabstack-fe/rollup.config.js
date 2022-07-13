@@ -6,8 +6,17 @@ import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
+import autoProcess from 'svelte-preprocess'
+import replace from '@rollup/plugin-replace';
+import { config as configDotenv } from 'dotenv';
+
+configDotenv();
 
 const production = !process.env.ROLLUP_WATCH;
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
+const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
 
 function serve() {
 	let server;
@@ -39,8 +48,21 @@ export default {
 		file: 'public/build/bundle.js'
 	},
 	plugins: [
+		replace({
+			include: ["src/**/*.ts", "src/**/*.svelte"],
+			preventAssignment: true,
+			values: {
+				keys: JSON.stringify({ 
+					GOOGLE_CLIENT_ID: GOOGLE_CLIENT_ID,
+					GOOGLE_CLIENT_SECRET: GOOGLE_CLIENT_SECRET,
+					GITHUB_CLIENT_ID: GITHUB_CLIENT_ID,
+					GITHUB_CLIENT_SECRET: GITHUB_CLIENT_SECRET
+				})
+			}
+		}),
+		typescript(),
 		svelte({
-			preprocess: sveltePreprocess({ sourceMap: !production }),
+			preprocess: autoProcess(),
 			compilerOptions: {
 				// enable run-time checks when not in production
 				dev: !production
