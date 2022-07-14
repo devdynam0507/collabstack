@@ -5,7 +5,7 @@ package net.collabstack.security;
  * */
 public class TokenInvalidException extends RuntimeException {
 
-    public TokenInvalidException(String message) {
+    public TokenInvalidException(final String message) {
         super(message);
     }
 

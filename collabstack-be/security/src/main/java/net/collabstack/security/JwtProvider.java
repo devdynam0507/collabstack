@@ -52,7 +52,7 @@ public class JwtProvider {
                 .as(type);
     }
 
-    private Date getExpiredDate(long expiredSecond) {
+    private Date getExpiredDate(final long expiredSecond) {
         final Date now = new Date();
         final Date expired = new Date();
         expired.setTime(now.getTime() + expiredSecond);
