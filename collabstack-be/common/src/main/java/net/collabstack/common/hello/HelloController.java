@@ -13,5 +13,4 @@ public class HelloController {
         return "Hello CollabStack";
     }
 
-
 }
