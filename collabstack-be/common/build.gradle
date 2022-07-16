@@ -5,10 +5,10 @@ plugins {
 }
 
 group 'net.collabstack.common'
-version '1.0-SNAPSHOT'
+version "$collabstack_version"
 
 bootJar {
-    enabled = true
+    enabled = false
 }
 
 jar {

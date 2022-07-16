@@ -1,3 +1,5 @@
 rootProject.name = 'collabstack'
 include 'common'
+include 'app'
+include 'security'
 
