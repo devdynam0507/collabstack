@@ -1,7 +1,5 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-    import resolveToken from '../utils/TokenUtil';
-
     const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } = keys;
     const GITHUB_OAUTH2_URL = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}`;
 
