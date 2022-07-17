@@ -26,7 +26,7 @@ public class PreJwtAuthenticationToken extends AbstractAuthenticationToken {
 
     @Override
     public Object getCredentials() {
-        return null;
+        return user;
     }
 
     public Long getId() {

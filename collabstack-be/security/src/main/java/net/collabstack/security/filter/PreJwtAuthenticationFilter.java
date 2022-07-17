@@ -1,47 +1,39 @@
 package net.collabstack.security.filter;
 
-import java.io.IOException;
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
-import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 
-import net.collabstack.security.JwtProvider;
 import net.collabstack.security.TokenInvalidException;
-import net.collabstack.security.member.MemberResolver;
-import net.collabstack.security.member.SecurityMember;
 
 import lombok.RequiredArgsConstructor;
 
-@Component
 @RequiredArgsConstructor
-public class PreJwtAuthenticationFilter extends OncePerRequestFilter {
+public class PreJwtAuthenticationFilter extends AbstractPreAuthenticatedProcessingFilter {
 
     private final String authenticationHeaderName = "Authorization";
     private final PreJwtAuthenticationTokenResolver tokenResolver;
-    private final JwtProvider jwtProvider;
-    private final MemberResolver<Long> memberResolver;
 
     @Override
-    protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response,
-                                    final FilterChain filterChain)
-            throws ServletException, IOException {
-        final String authorizationValue = request.getHeader(authenticationHeaderName);
-        if (!authorizationValue.isBlank()) {
-            throw new TokenInvalidException("Token이 유효하지 않습니다");
+    protected Object getPreAuthenticatedPrincipal(HttpServletRequest request) {
+        final String authorizationValue = extractAuthorizationHeader(request);
+        if (authorizationValue == null) {
+            return null;
         }
-        final String token = tokenResolver.resolve(authorizationValue);
-        final Long id = jwtProvider.decrypt(token, "id", Long.class);
-        final SecurityMember<Long> member = memberResolver.resolveMember(id);
-
-        SecurityContextHolder.getContext().setAuthentication(
-                new PreJwtAuthenticationToken(id, member.getAuthorities(), member));
-        filterChain.doFilter(request, response);
+        return tokenResolver.resolve(authorizationValue);
     }
 
+    @Override
+    protected Object getPreAuthenticatedCredentials(HttpServletRequest request) {
+        final String authorizationValue = extractAuthorizationHeader(request);
+        if (authorizationValue == null) {
+            return null;
+        }
+        return tokenResolver.resolve(authorizationValue);
+    }
+
+    private String extractAuthorizationHeader(final HttpServletRequest request) {
+        final String authorizationValue = request.getHeader(authenticationHeaderName);
+        return authorizationValue;
+    }
 }

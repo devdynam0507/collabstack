@@ -13,7 +13,13 @@ bootJar {
 }
 
 jar {
-    enabled = false
+    enabled = true
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.security:spring-security-bom:5.7.2'
+    }
 }
 
 repositories {
@@ -22,7 +28,7 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web:$spring_version")
-    implementation("org.springframework.boot:spring-boot-starter-security:$spring_version")
+    implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("com.auth0:java-jwt:$jwt_version")
     implementation("org.springframework.boot:spring-boot-starter-test:$spring_version")
 }
