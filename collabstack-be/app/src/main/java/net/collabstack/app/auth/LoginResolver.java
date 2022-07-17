@@ -1,7 +1,7 @@
-package com.collabstack.app.auth;
+package net.collabstack.app.auth;
 
-import com.collabstack.app.auth.dto.SocialLoginRequest;
-import com.collabstack.app.auth.type.AuthenticationProvider;
+import net.collabstack.app.auth.dto.SocialLoginRequest;
+import net.collabstack.app.auth.type.AuthenticationProvider;
 
 public interface LoginResolver {
 

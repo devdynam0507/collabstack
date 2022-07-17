@@ -1,15 +1,14 @@
-package com.collabstack.app.auth;
+package net.collabstack.app.auth;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import net.collabstack.app.auth.dto.SocialLoginRequest;
+import net.collabstack.app.auth.dto.SocialLoginResponse;
 import net.collabstack.common.CommonResponse;
 import net.collabstack.common.ResultCode;
-
-import com.collabstack.app.auth.dto.SocialLoginRequest;
-import com.collabstack.app.auth.dto.SocialLoginResponse;
 
 import lombok.RequiredArgsConstructor;
 
