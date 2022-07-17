@@ -4,8 +4,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import net.collabstack.app.auth.type.AuthenticationProvider;
 import net.collabstack.app.auth.dto.SocialLoginRequest;
+import net.collabstack.app.auth.type.AuthenticationProvider;
 import net.collabstack.security.JwtProvider;
 
 import com.auth0.jwt.interfaces.Claim;
