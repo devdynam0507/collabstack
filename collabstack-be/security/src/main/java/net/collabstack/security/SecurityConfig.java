@@ -41,17 +41,6 @@ public class SecurityConfig {
     @Bean
     @Order(SecurityProperties.BASIC_AUTH_ORDER)
     public SecurityFilterChain securityFilterChain(final HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-//            .antMatchers(HttpMethod.POST, "/v1/login").permitAll()
-//            .and().authorizeRequests()
-//            .antMatchers(
-//                    "/favicon.ico",
-//                    "/h2-console/**",
-//                    "/hello",
-//                    "/error"
-//            ).permitAll()
-//            .and().authorizeRequests()
-//            .anyRequest().authenticated();
         http.cors().configurationSource(corsConfigurationSource());
         http.csrf().disable();
         http.formLogin().disable();
