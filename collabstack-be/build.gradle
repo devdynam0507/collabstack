@@ -53,4 +53,9 @@ subprojects {
         ignoreFailures = false
         configFile = file("$rootDir/settings/checkstyle.xml")
     }
+
+    checkstyleTest {
+        ignoreFailures = false
+        configFile = file("$rootDir/settings/checkstyle.xml")
+    }
 }
