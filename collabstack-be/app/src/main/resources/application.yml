@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: ENC(nmggxtTyLRIvtQvfKQYp2YruRgMXIzXL9CfDjzv8cUJkQRBLm88GosQuWBXVQl/xJFeq2q3mck/VNZqj3Z+mRbB2YFFBe2LGt3qv5q+edhCFISoNoqM1z2T1SMInjqKV7/pMm5gtzfdS/OFDhdAMZQ==)
+    username: ENC(P0SBB7jEMc76+PLETIOXGw==)
+    password: ENC(VnynpWy+QSp8P46lk3zbxC0ODskF89wF)
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    hibernate:
+      show-sql: true
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndTripleDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+github:
+  secret: ENC(zDOTLjoX2CVGSIvzkYvkXWw1J09X/hcQETYFH4jyzsM=)
+  client_id: ENC(la0inLpR0kkKq28rBtAKsXck/nGblSGTsy5Gx6L28It5vxe2AajQgQ2jUkttqoQceNgb4ug/D/I=)
+jwt:
+  secretkey: ENC(odDl+AfyLo+DKaaM0NdqhkpjgZi8jXe+9GjFGIGHpNmjfOlNweT/MelewLCq7llf)
