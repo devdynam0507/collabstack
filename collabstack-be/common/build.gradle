@@ -12,7 +12,7 @@ bootJar {
 }
 
 jar {
-    enabled = false
+    enabled = true
 }
 
 repositories {
@@ -20,11 +20,10 @@ repositories {
 }
 
 dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-test')
     implementation('org.springframework.boot:spring-boot-starter-web')
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
     implementation('mysql:mysql-connector-java')
-
-    implementation('org.springframework.boot:spring-boot-starter-test')
 }
 
 test {
