@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
     import NavbarLayout from "./NavbarLayout.svelte";
     import UserLayout from "./UserLayout.svelte";
     import Profile from "../components/Profile.svelte";

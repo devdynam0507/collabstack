@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
 	import LoginLayout from "./layout/LoginLayout.svelte";
 </script>
 

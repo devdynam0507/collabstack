@@ -1,5 +1,5 @@
-<script lang="ts">
-    export let badges: string[];
+<script>
+    export let badges;
 </script>
 
 {#each badges as badge}

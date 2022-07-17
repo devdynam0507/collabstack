@@ -2,9 +2,23 @@
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 </svelte:head>
 <script>
+    import axios from 'axios';
     const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } = keys;
-    window.handleCredentialResponse = (res) => {
-        console.log(res);
+    window.handleCredentialResponse = async (res) => {
+        const response = await axios.post('http://localhost:8080/v1/login', JSON.stringify({
+            'provider': 'google',
+            'token': res.credential
+        }), {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        });
+        const responseData = response.data;
+        if (responseData) {
+            localStorage.setItem("accessToken", responseData.data.accessToken)
+            // TODO: CHANGE PAGE
+        }
     }
 </script>
 

@@ -4,7 +4,6 @@ import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import sveltePreprocess from 'svelte-preprocess';
-import typescript from '@rollup/plugin-typescript';
 import css from 'rollup-plugin-css-only';
 import autoProcess from 'svelte-preprocess'
 import replace from '@rollup/plugin-replace';
@@ -40,7 +39,7 @@ function serve() {
 }
 
 export default {
-	input: 'src/main.ts',
+	input: 'src/main.js',
 	output: {
 		sourcemap: true,
 		format: 'iife',
@@ -49,7 +48,7 @@ export default {
 	},
 	plugins: [
 		replace({
-			include: ["src/**/*.ts", "src/**/*.svelte"],
+			include: ["src/**/*.js", "src/**/*.svelte"],
 			preventAssignment: true,
 			values: {
 				keys: JSON.stringify({ 
@@ -60,7 +59,6 @@ export default {
 				})
 			}
 		}),
-		typescript(),
 		svelte({
 			preprocess: autoProcess(),
 			compilerOptions: {
@@ -82,10 +80,10 @@ export default {
 			dedupe: ['svelte']
 		}),
 		commonjs(),
-		typescript({
-			sourceMap: !production,
-			inlineSources: !production
-		}),
+		// typescript({
+		// 	sourceMap: !production,
+		// 	inlineSources: !production
+		// }),
 
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated

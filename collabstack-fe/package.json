@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "start": "sirv public --no-clear",
+    "dev": "rollup -c -w --port 8700",
+    "start": "sirv public --no-clear --port 8700",
     "check": "svelte-check --tsconfig ./tsconfig.json"
   },
   "devDependencies": {
@@ -27,6 +27,7 @@
     "typescript": "4.7.4"
   },
   "dependencies": {
+    "axios": "0.27.2",
     "sirv-cli": "^2.0.0"
   }
 }

@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
     import Badge from "./Badge.svelte";
 </script>
 
