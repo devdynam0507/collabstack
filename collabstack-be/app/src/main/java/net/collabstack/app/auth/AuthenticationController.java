@@ -17,14 +17,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthenticationController {
 
-    private final LoginResolver loginResolver;
+    private final LoginStrategy loginStrategy;
 
     @PostMapping
     public CommonResponse<SocialLoginResponse> login(@RequestBody final SocialLoginRequest loginRequest) {
-        final String token = loginResolver.resolveLogin(loginRequest);
+        if (loginRequest.getProvider() == null) {
+            throw new IllegalArgumentException("소셜 로그인 provider는 필수입니다.");
+        }
+        final String token = loginStrategy.strategy(loginRequest.getProvider())
+                                          .resolveLogin(loginRequest);
         final SocialLoginResponse response = new SocialLoginResponse();
         response.setAccessToken(token);
         return CommonResponse.success(ResultCode.OK, "인증되었습니다.", response);
     }
-
 }
