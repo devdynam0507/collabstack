@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.Claim;
 
 @Component
 public class JwtProvider {
@@ -50,6 +51,11 @@ public class JwtProvider {
         return (T) jwtVerifier.verify(token)
                 .getClaim(claimKey)
                 .as(type);
+    }
+
+    public Map<String, Claim> decryptWithNoAlgorithm(final String token) {
+        return JWT.decode(token)
+                .getClaims();
     }
 
     private Date getExpiredDate(final long expiredSecond) {
