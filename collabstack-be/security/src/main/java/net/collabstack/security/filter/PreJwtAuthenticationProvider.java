@@ -30,7 +30,6 @@ public class PreJwtAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         if (supports(authentication.getClass())) {
             final String token = authentication.getPrincipal().toString();
-            System.out.println(token);
             if (token == null) {
                 final SecurityMember<Void> anonymous =
                         new SecurityMember<>(

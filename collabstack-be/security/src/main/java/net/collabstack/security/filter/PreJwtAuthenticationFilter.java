@@ -4,8 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 
-import net.collabstack.security.TokenInvalidException;
-
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
