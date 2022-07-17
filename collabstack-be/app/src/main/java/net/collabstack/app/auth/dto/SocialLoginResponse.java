@@ -1,4 +1,4 @@
-package com.collabstack.app.auth.dto;
+package net.collabstack.app.auth.dto;
 
 import lombok.Data;
 

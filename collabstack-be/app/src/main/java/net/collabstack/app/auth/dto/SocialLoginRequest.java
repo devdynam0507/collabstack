@@ -1,6 +1,6 @@
-package com.collabstack.app.auth.dto;
+package net.collabstack.app.auth.dto;
 
-import com.collabstack.app.auth.type.AuthenticationProvider;
+import net.collabstack.app.auth.type.AuthenticationProvider;
 
 import lombok.Data;
 

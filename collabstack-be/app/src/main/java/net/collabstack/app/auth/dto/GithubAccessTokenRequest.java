@@ -1,8 +1,12 @@
-package com.collabstack.app.auth.dto;
+package net.collabstack.app.auth.dto;
+
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 import lombok.Data;
 
 @Data
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class GithubAccessTokenRequest {
 
     private final String clientId;
