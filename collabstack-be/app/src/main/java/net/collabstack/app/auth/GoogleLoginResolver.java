@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import net.collabstack.app.auth.dto.SocialLoginRequest;
 import net.collabstack.app.auth.type.AuthenticationProvider;
+import net.collabstack.app.member.MemberService;
+import net.collabstack.app.member.dto.MemberCreate;
 import net.collabstack.security.JwtProvider;
 
 import com.auth0.jwt.interfaces.Claim;
@@ -18,6 +20,8 @@ public class GoogleLoginResolver implements LoginResolver {
 
     private final JwtProvider jwtProvider;
 
+    private final MemberService memberService;
+
     @Override
     public String resolveLogin(final SocialLoginRequest loginRequest) {
         if (loginRequest.getToken() == null) {
@@ -29,9 +33,13 @@ public class GoogleLoginResolver implements LoginResolver {
         }
         final Map<String, Claim> claimMap =
                 jwtProvider.decryptWithNoAlgorithm(loginRequest.getToken());
-        final String imageUrl = claimMap.get("picture").asString();
-        final String name = claimMap.get("name").asString();
         final String email = claimMap.get("email").asString();
+        memberService.createMember(MemberCreate.from((memberCreate) -> {
+            memberCreate.setEmail(email);
+            memberCreate.setUsername(claimMap.get("name").asString());
+            memberCreate.setProfileImageUrl(claimMap.get("picture").asString());
+            return memberCreate;
+        }));
         return jwtProvider.encrypt("id", email, 60L * 60);
     }
 

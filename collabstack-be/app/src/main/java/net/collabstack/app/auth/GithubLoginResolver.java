@@ -8,6 +8,8 @@ import net.collabstack.app.auth.dto.GithubUserResponse;
 import net.collabstack.app.auth.dto.SocialLoginRequest;
 import net.collabstack.app.auth.external.GithubExternalApiService;
 import net.collabstack.app.auth.type.AuthenticationProvider;
+import net.collabstack.app.member.MemberService;
+import net.collabstack.app.member.dto.MemberCreate;
 import net.collabstack.security.JwtProvider;
 
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ public class GithubLoginResolver implements LoginResolver {
 
     private final JwtProvider jwtProvider;
     private final GithubExternalApiService githubApi;
+    private final MemberService memberService;
 
     @Value("${github.secret}")
     private String githubSecret;
@@ -39,6 +42,14 @@ public class GithubLoginResolver implements LoginResolver {
             throw new IllegalStateException("로그인을 다시 시도해주세요.");
         }
         final GithubUserResponse githubUserResponse = githubApi.resolveGithubUser(accessToken);
+        memberService.createMember(MemberCreate.from(memberCreate -> {
+            memberCreate.setEmail(githubUserResponse.getEmail());
+            memberCreate.setUsername(githubUserResponse.getName());
+            memberCreate.setCompany(githubUserResponse.getCompany());
+            memberCreate.setProfileImageUrl(githubUserResponse.getImageUrl());
+            memberCreate.setGithubUrl(githubUserResponse.getGithubUrl());
+            return memberCreate;
+        }));
         return jwtProvider.encrypt("id", githubUserResponse.getEmail(), 60L * 60);
     }
 
