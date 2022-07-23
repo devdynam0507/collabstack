@@ -27,7 +27,7 @@ public class PreJwtAuthenticationProvider implements AuthenticationProvider {
     private final MemberResolver<Long> memberResolver;
 
     @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    public Authentication authenticate(final Authentication authentication) throws AuthenticationException {
         if (supports(authentication.getClass())) {
             final String token = authentication.getPrincipal().toString();
             if (token == null) {
@@ -44,7 +44,7 @@ public class PreJwtAuthenticationProvider implements AuthenticationProvider {
     }
 
     @Override
-    public boolean supports(Class<?> authentication) {
+    public boolean supports(final Class<?> authentication) {
         return PreJwtAuthenticationToken.class.isAssignableFrom(authentication);
     }
 }

@@ -13,7 +13,7 @@ public class PreJwtAuthenticationFilter extends AbstractPreAuthenticatedProcessi
     private final PreJwtAuthenticationTokenResolver tokenResolver;
 
     @Override
-    protected Object getPreAuthenticatedPrincipal(HttpServletRequest request) {
+    protected Object getPreAuthenticatedPrincipal(final HttpServletRequest request) {
         final String authorizationValue = extractAuthorizationHeader(request);
         if (authorizationValue == null) {
             return null;
@@ -22,7 +22,7 @@ public class PreJwtAuthenticationFilter extends AbstractPreAuthenticatedProcessi
     }
 
     @Override
-    protected Object getPreAuthenticatedCredentials(HttpServletRequest request) {
+    protected Object getPreAuthenticatedCredentials(final HttpServletRequest request) {
         final String authorizationValue = extractAuthorizationHeader(request);
         if (authorizationValue == null) {
             return null;
