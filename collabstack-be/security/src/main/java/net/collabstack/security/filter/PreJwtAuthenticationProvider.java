@@ -2,11 +2,13 @@ package net.collabstack.security.filter;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 
 import net.collabstack.security.JwtProvider;
 import net.collabstack.security.TokenInvalidException;
@@ -21,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 public class PreJwtAuthenticationProvider implements AuthenticationProvider {
 
     private final static Collection<SimpleGrantedAuthority> anonymousRoles =
-            Arrays.asList(new SimpleGrantedAuthority("Anonymous"));
+            List.of(new SimpleGrantedAuthority("Anonymous"));
 
     private final JwtProvider jwtProvider;
     private final MemberResolver<Long> memberResolver;
@@ -45,6 +47,6 @@ public class PreJwtAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public boolean supports(final Class<?> authentication) {
-        return PreJwtAuthenticationToken.class.isAssignableFrom(authentication);
+        return PreAuthenticatedAuthenticationToken.class.isAssignableFrom(authentication);
     }
 }

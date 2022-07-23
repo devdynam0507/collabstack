@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
@@ -42,6 +43,27 @@ public class JwtProvider {
                   .withClaim(claimKey, String.valueOf(value))
                   .withExpiresAt(getExpiredDate(expiredSecond))
                   .sign(algorithm);
+    }
+
+    public <T> String encryptWithoutAlgorithm(
+            final String claimKey, final T value, final Long expiredSecond) {
+        if (value instanceof List || value instanceof Map) {
+            throw new IllegalArgumentException("지원되지 않는 claim type 입니다.");
+        }
+        return JWT.create()
+                .withClaim(claimKey, String.valueOf(value))
+                .withExpiresAt(getExpiredDate(expiredSecond))
+                .sign(Algorithm.none());
+    }
+
+    public <T, V> String encryptMapWithoutAlgorithm(
+            final Map<String, V> claims, final Long expiredSecond) {
+        final JWTCreator.Builder builder = JWT.create();
+        for (Map.Entry<String, V> entry : claims.entrySet()) {
+            builder.withClaim(entry.getKey(), String.valueOf(entry.getValue()));
+        }
+        return builder.withExpiresAt(getExpiredDate(expiredSecond))
+                .sign(Algorithm.none());
     }
 
     public <T> T decrypt(final String token, final String claimKey, final Class<? extends T > type) {
