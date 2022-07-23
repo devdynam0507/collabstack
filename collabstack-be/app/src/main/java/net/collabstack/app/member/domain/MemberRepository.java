@@ -1,2 +1,6 @@
-package net.collabstack.app.member.domain;public interface MemberRepository {
+package net.collabstack.app.member.domain;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MemberRepository extends JpaRepository<Member, String> {
 }
