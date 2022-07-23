@@ -23,7 +23,8 @@ public class GoogleLoginResolverTest {
         jwtProvider = new JwtProvider();
         jwtProvider.setSecretKey("secret");
         jwtProvider.init();
-        resolver =  new GoogleLoginResolver(jwtProvider);
+        // TODO: memberService mocking 추가
+        resolver =  new GoogleLoginResolver(jwtProvider, null);
     }
 
     @Test
