@@ -1,6 +1,6 @@
 package net.collabstack.app.auth;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
@@ -77,7 +77,8 @@ class GithubLoginResolverTest {
         externalMockServer.expect(requestTo(githubAccessTokenResolveUrl))
                           .andExpect(method(HttpMethod.POST))
                           .andRespond(withSuccess(
-                                  objectMapper.writeValueAsString(accessTokenResponse), MediaType.APPLICATION_JSON));
+                                  objectMapper.writeValueAsString(accessTokenResponse),
+                                  MediaType.APPLICATION_JSON));
         externalMockServer.expect(requestTo(githubUserInfoResolveUrl))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(withSuccess(
