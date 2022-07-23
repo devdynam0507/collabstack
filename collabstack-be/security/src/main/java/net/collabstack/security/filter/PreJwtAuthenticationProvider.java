@@ -1,6 +1,5 @@
 package net.collabstack.security.filter;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class PreJwtAuthenticationProvider implements AuthenticationProvider {
             List.of(new SimpleGrantedAuthority("Anonymous"));
 
     private final JwtProvider jwtProvider;
-    private final MemberResolver<Long> memberResolver;
+    private final MemberResolver<String> memberResolver;
 
     @Override
     public Authentication authenticate(final Authentication authentication) throws AuthenticationException {
@@ -36,11 +35,12 @@ public class PreJwtAuthenticationProvider implements AuthenticationProvider {
                 final SecurityMember<Void> anonymous =
                         new SecurityMember<>(
                                 null, "anonymous", false, anonymousRoles);
-                return new PreJwtAuthenticationToken(null, anonymousRoles, anonymous);
+                return new PreAuthenticatedAuthenticationToken(anonymousRoles, "", anonymousRoles);
             }
-            final Long id = jwtProvider.decrypt(token, "id", Long.class);
-            final SecurityMember<Long> member = memberResolver.resolveMember(id);
-            return new PreJwtAuthenticationToken(member.getId(), member.getAuthorities(), member);
+            final String id = jwtProvider.decrypt(token, "id", String.class);
+            final SecurityMember<String> member = memberResolver.resolveMember(id);
+            return new PreAuthenticatedAuthenticationToken(
+                    member, "", List.of(new SimpleGrantedAuthority("Member")));
         }
         throw new TokenInvalidException("토큰을 찾을 수 없습니다.");
     }

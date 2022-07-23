@@ -9,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PreJwtAuthenticationFilter extends AbstractPreAuthenticatedProcessingFilter {
 
-    private final String authenticationHeaderName = "Authorization";
     private final PreJwtAuthenticationTokenResolver tokenResolver;
 
     @Override
@@ -31,6 +30,7 @@ public class PreJwtAuthenticationFilter extends AbstractPreAuthenticatedProcessi
     }
 
     private String extractAuthorizationHeader(final HttpServletRequest request) {
+        final String authenticationHeaderName = "Authorization";
         final String authorizationValue = request.getHeader(authenticationHeaderName);
         return authorizationValue;
     }

@@ -33,7 +33,7 @@ public class SecurityConfig {
     private JwtProvider jwtProvider;
 
     @Autowired
-    private MemberResolver<Long> memberResolver;
+    private MemberResolver<String> memberResolver;
 
     @Autowired
     private PreJwtAuthenticationTokenResolver tokenResolver;
@@ -50,6 +50,8 @@ public class SecurityConfig {
         http
             .authorizeRequests()
             .antMatchers(HttpMethod.POST, "/v1/login").permitAll()
+            // TODO: 추후에 인증 필터 거치도록 변경해야합니다.
+            .antMatchers(HttpMethod.GET, "/v1/member/*").permitAll()
             .and().authorizeRequests()
             .antMatchers(
                     "/favicon.ico",
