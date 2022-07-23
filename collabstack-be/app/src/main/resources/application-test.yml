@@ -1,0 +1,33 @@
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    sql-script-encoding: UTF-8
+    url: jdbc:h2:mem:testdb;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    hibernate:
+      dialect: org.hibernate.dialect.MySQL8Dialect
+      database-platform: org.hibernate.dialect.H2Dialect
+      ddl-auto: create-drop
+      show-sql: true
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndTripleDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+github:
+  secret: ENC(zDOTLjoX2CVGSIvzkYvkXWw1J09X/hcQETYFH4jyzsM=)
+  client_id: ENC(la0inLpR0kkKq28rBtAKsXck/nGblSGTsy5Gx6L28It5vxe2AajQgQ2jUkttqoQceNgb4ug/D/I=)
+jwt:
+  secretkey: ENC(odDl+AfyLo+DKaaM0NdqhkpjgZi8jXe+9GjFGIGHpNmjfOlNweT/MelewLCq7llf)
