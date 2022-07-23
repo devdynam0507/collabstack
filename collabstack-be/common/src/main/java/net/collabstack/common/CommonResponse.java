@@ -35,7 +35,7 @@ public class CommonResponse<T> {
 
     public static <U> CommonResponse<U> failure(
             final ResultCode resultCode, final String message, final U data) {
-        return failure(resultCode, message, data);
+        return new CommonResponse<>(resultCode, message, data);
     }
 
     public ResponseEntity<CommonResponse<T>> wrapOk() {
