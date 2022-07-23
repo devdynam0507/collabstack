@@ -15,5 +15,4 @@ public class GithubAccessTokenResponse {
     private String tokenType;
     @JsonProperty("scope")
     private String scope;
-
 }
