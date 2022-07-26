@@ -46,19 +46,22 @@ public class SecurityConfig {
         http.formLogin().disable();
         http.logout().disable();
         http.httpBasic().disable();
+        http.headers().frameOptions().sameOrigin();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http
             .authorizeRequests()
             .antMatchers(HttpMethod.POST, "/v1/login").permitAll()
             // TODO: 추후에 인증 필터 거치도록 변경해야합니다.
             .antMatchers(HttpMethod.GET, "/v1/member/*").permitAll()
+            .antMatchers(HttpMethod.GET, "/v1/letters/*").permitAll()
+            .antMatchers(HttpMethod.POST, "/v1/letters/*").permitAll()
             .and().authorizeRequests()
             .antMatchers(
                     "/favicon.ico",
                     "/h2-console/**",
                     "/hello",
                     "/error"
-            ).hasAnyRole()
+            ).permitAll()
             .and()
             .authorizeRequests().anyRequest().hasRole("Member")
             .and()
@@ -84,6 +87,7 @@ public class SecurityConfig {
         corsConfiguration.addAllowedOrigin("https://collabstack.net");
         corsConfiguration.addAllowedOrigin("https://www.collabstack.net");
         corsConfiguration.addAllowedOrigin("http://localhost:8700");
+        corsConfiguration.addAllowedOrigin("http://localhost:8080");
         corsConfiguration.addAllowedMethod("*");
         corsConfiguration.addAllowedHeader("*");
         corsConfiguration.setAllowCredentials(true);
