@@ -11,5 +11,4 @@ public class CollabStackApp {
     public static void main(final String[] args) {
         SpringApplication.run(CollabStackApp.class, args);
     }
-
 }
