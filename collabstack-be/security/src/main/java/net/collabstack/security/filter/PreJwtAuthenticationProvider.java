@@ -34,7 +34,7 @@ public class PreJwtAuthenticationProvider implements AuthenticationProvider {
             if (token == null) {
                 final SecurityMember<Void> anonymous =
                         new SecurityMember<>(
-                                null, "anonymous", false, anonymousRoles);
+                                null, "anonymous", anonymousRoles);
                 return new PreAuthenticatedAuthenticationToken(anonymousRoles, "", anonymousRoles);
             }
             final String id = jwtProvider.decrypt(token, "id", String.class);
