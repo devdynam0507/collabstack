@@ -28,6 +28,6 @@ public class AuthenticationController {
                                           .resolveLogin(loginRequest);
         final SocialLoginResponse response = new SocialLoginResponse();
         response.setAccessToken(token);
-        return CommonResponse.success(ResultCode.OK, "인증되었습니다.", response);
+        return CommonResponse.success(ResultCode.OK, "인증되었습니다.",  );
     }
 }
