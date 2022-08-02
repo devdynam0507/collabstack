@@ -12,6 +12,7 @@ import net.collabstack.common.ResultCode;
 
 import lombok.RequiredArgsConstructor;
 
+
 @RestController
 @RequestMapping("/v1/member")
 @RequiredArgsConstructor
@@ -25,4 +26,5 @@ public class MemberController {
         final MemberResponse memberResponse = MemberResponse.from(member);
         return CommonResponse.success(ResultCode.CREATED, "멤버를 성공적으로 조회하였습니다.", memberResponse);
     }
+
 }

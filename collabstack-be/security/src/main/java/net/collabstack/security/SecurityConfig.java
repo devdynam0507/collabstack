@@ -52,7 +52,7 @@ public class SecurityConfig {
             .antMatchers(HttpMethod.POST, "/v1/login").permitAll()
             // TODO: 추후에 인증 필터 거치도록 변경해야합니다.
             .antMatchers(HttpMethod.GET, "/v1/member/*").permitAll()
-            .and().authorizeRequests()
+                .and().authorizeRequests()
             .antMatchers(
                     "/favicon.ico",
                     "/h2-console/**",
