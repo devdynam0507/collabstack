@@ -3,7 +3,7 @@ package net.collabstack.common.cache;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Configuration;
 
-@EnableCaching
 @Configuration
+@EnableCaching
 public class EhcacheConfig {
 }

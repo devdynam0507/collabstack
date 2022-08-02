@@ -19,7 +19,6 @@ import lombok.RequiredArgsConstructor;
 public class MemberController {
 
     private final MemberService memberService;
-
     @GetMapping("/{email}")
     public CommonResponse<MemberResponse> getMember(@PathVariable("email") final String email) {
         final Member member = memberService.getMember(email);

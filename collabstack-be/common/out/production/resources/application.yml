@@ -2,3 +2,5 @@ spring:
   cache:
     jcache:
       config: classpath:ehcache.xml
+  main:
+    allow-bean-definition-overriding: true
