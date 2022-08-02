@@ -25,7 +25,6 @@ public class MemberResolverImpl implements MemberResolver<String> {
         final Member member = memberService.getMember(id);
         return new SecurityMember<>(id,
                                     member.getName(),
-                                    false,
                                     List.of(new SimpleGrantedAuthority("Member")));
     }
 }

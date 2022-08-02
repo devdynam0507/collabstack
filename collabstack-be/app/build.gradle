@@ -36,6 +36,7 @@ dependencies {
     implementation('org.apache.httpcomponents:httpcore')
     implementation('org.apache.httpcomponents:httpclient')
     implementation("com.auth0:java-jwt:$jwt_version")
+    testImplementation("org.springframework.security:spring-security-test");
 }
 
 test {
