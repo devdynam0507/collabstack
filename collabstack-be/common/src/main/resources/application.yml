@@ -1,1 +1,4 @@
-
+spring:
+  cache:
+    jcache:
+      config: classpath:ehcache.xml
